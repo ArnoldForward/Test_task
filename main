@@ -1,1 +1,51 @@
 
+#include <stdio.h>
+
+int main()
+{
+    int n = 0;
+    scanf("%d", &n);
+    int a[1000] = {0};
+    for(int i= 0; i < n; i++)
+        scanf("%d", &a[i]);
+    int k = 0, j = 0;
+    int sums[1000] = {0};
+    while(k < n)
+    {
+        int sum = 0;
+        for(int i = k; i < n; i++)
+        {
+            sum += a[i];
+            sums[j] = sum;
+            j++;
+        }
+        k++;
+    }
+    int max = -999;
+    for(int i = 0; i < j; i++)
+        if(sums[i] > max)
+            max = sums[i];
+    printf("max = %d\n", max);
+    k = 0, j = 0;
+    int res[1000] = {0};
+    while(k < n)
+    {
+        int sum = 0, counter = 0;
+
+        for(int i = k; i < n; i++)
+        {
+            sum += a[i];
+            counter++;
+            if(sum == max)
+                break;
+        }
+        if(sum == max)
+        {
+            for(int i = k; i < k + counter; i++)
+                printf("%d ", a[i]);
+            break;
+        }
+        k++;
+    }
+    return 0;
+}
